@@ -84,8 +84,6 @@ namespace SIGVerse.Competition.Handyman
 		{
 			try
 			{
-				if(HandymanConfig.Instance.configFileInfo.playbackType == WorldPlaybackCommon.PlaybackTypePlay) { return; }
-
 				this.tool = new HandymanModeratorTool(this);
 
 				this.stepTimer = new StepTimer();

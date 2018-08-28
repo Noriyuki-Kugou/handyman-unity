@@ -256,7 +256,6 @@ namespace SIGVerse.Competition.Handyman
 			this.avatarMotionRecorder = avatarMotionPlayback.GetComponent<HandymanAvatarMotionRecorder>();
 
 			this.playbackRecorder = worldPlayback.GetComponent<HandymanPlaybackRecorder>();
-			this.playbackRecorder.SetEnvironmentName(this.environmentName);
 		}
 
 
