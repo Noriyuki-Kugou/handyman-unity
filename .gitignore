@@ -54,8 +54,6 @@ SIGVerse*.log
 /SIGVerseConfig/Handyman/*
 !/SIGVerseConfig/Handyman/sample/
 
-/TTS/*
-!/TTS/.gitkeep
 
 /Assets/OVR*
 /Assets/Plugins*

@@ -193,7 +193,6 @@ namespace SIGVerse.Competition.Handyman
 				{
 					SIGVerseLogger.Info("Failed '" + this.interruptedReason + "'");
 					this.SendPanelNotice("Failed\n"+ interruptedReason.Replace('_',' '), 100, PanelNoticeStatus.Red);
-					StartCoroutine(this.tool.SpeakFailed()); // Speech (Using External executable file)
 					this.GoToNextTaskTaskFailed(this.interruptedReason);
 				}
 
@@ -220,7 +219,6 @@ namespace SIGVerse.Competition.Handyman
 					case ModeratorStep.TaskStart:
 					{
 						SIGVerseLogger.Info("Task start!");
-						StartCoroutine(this.tool.Speak("Task start!")); // Speech (Using External executable file)
 
 						this.scoreManager.TaskStart();
 
@@ -253,8 +251,6 @@ namespace SIGVerse.Competition.Handyman
 						{
 							this.SendRosMessage(MsgInstruction, this.taskMessage);
 
-							StartCoroutine(this.tool.Speak(this.taskMessage)); // Speech (Using External executable file)
-
 							this.step++;
 
 							SIGVerseLogger.Info("Waiting for '" + MsgRoomReached + "'");
@@ -279,14 +275,12 @@ namespace SIGVerse.Competition.Handyman
 								SIGVerseLogger.Info("Succeeded '" + MsgRoomReached + "'");
 								this.SendPanelNotice("Good", 150, PanelNoticeStatus.Green);
 								this.scoreManager.AddScore(Score.Type.RoomReachingSuccess);
-								StartCoroutine(this.tool.SpeakGood()); // Speech (Using External executable file)
 							}
 							else
 							{
 								SIGVerseLogger.Info("Failed '" + MsgRoomReached + "'");
 								this.SendPanelNotice("Failed\n" + MsgRoomReached.Replace('_', ' '), 100, PanelNoticeStatus.Red);
 								this.scoreManager.AddScore(Score.Type.RoomReachingFailure);
-								StartCoroutine(this.tool.SpeakFailed()); // Speech (Using External executable file)
 
 								this.GoToNextTaskTaskFailed(MsgRoomReached);
 
@@ -320,13 +314,10 @@ namespace SIGVerse.Competition.Handyman
 							SIGVerseLogger.Info("Succeeded '" + MsgDoesNotExist + "'");
 							this.SendPanelNotice("Good\n"+detail, 95, PanelNoticeStatus.Green);
 							this.scoreManager.AddScore(Score.Type.TargetConfirmationSuccess);
-							StartCoroutine(this.tool.SpeakGood()); // Speech (Using External executable file)
 
 							this.SendRosMessage(MsgCorrectedInstruction, this.correctedTaskMessage);
 							this.mainPanelController.SetTaskMessageText(this.correctedTaskMessage);
 							
-							StartCoroutine(this.tool.Speak(this.correctedTaskMessage)); // Speech (Using External executable file)
-
 							this.step++;
 
 							SIGVerseLogger.Info("Waiting for '" + MsgObjectGrasped + "'");
@@ -339,7 +330,6 @@ namespace SIGVerse.Competition.Handyman
 							SIGVerseLogger.Info("Failed '" + MsgDoesNotExist + "'");
 							this.SendPanelNotice("Failed\n"+detail, 90, PanelNoticeStatus.Red);
 							this.scoreManager.AddScore(Score.Type.TargetConfirmationFailure);
-							StartCoroutine(this.tool.SpeakFailed()); // Speech (Using External executable file)
 
 							this.GoToNextTaskTaskFailed(MsgDoesNotExist);
 
@@ -357,7 +347,6 @@ namespace SIGVerse.Competition.Handyman
 								SIGVerseLogger.Info("Failed '" + MsgObjectGrasped + "'");
 								this.SendPanelNotice("Failed\n"+detail, 100, PanelNoticeStatus.Red);
 								this.scoreManager.AddScore(Score.Type.GraspingFailure);
-								StartCoroutine(this.tool.SpeakFailed()); // Speech (Using External executable file)
 
 								this.GoToNextTaskTaskFailed(detail);
 
@@ -381,14 +370,12 @@ namespace SIGVerse.Competition.Handyman
 								SIGVerseLogger.Info("Succeeded '" + MsgObjectGrasped + "'");
 								this.SendPanelNotice("Good", 150, PanelNoticeStatus.Green);
 								this.scoreManager.AddScore(Score.Type.GraspingSuccess);
-								StartCoroutine(this.tool.SpeakGood()); // Speech (Using External executable file)
 							}
 							else
 							{
 								SIGVerseLogger.Info("Failed '" + MsgObjectGrasped + "'");
 								this.SendPanelNotice("Failed\n" + MsgObjectGrasped.Replace('_', ' '), 100, PanelNoticeStatus.Red);
 								this.scoreManager.AddScore(Score.Type.GraspingFailure);
-								StartCoroutine(this.tool.SpeakFailed()); // Speech (Using External executable file)
 
 								this.GoToNextTaskTaskFailed(MsgObjectGrasped);
 
@@ -430,7 +417,6 @@ namespace SIGVerse.Competition.Handyman
 								SIGVerseLogger.Info("Succeeded '" + MsgTaskFinished + "'");
 								this.SendPanelNotice("Succeeded!", 150, PanelNoticeStatus.Green);
 								this.scoreManager.AddScore(Score.Type.PlacementSuccess);
-								StartCoroutine(this.tool.Speak("Succeeded!")); // Speech (Using External executable file)
 
 								this.GoToNextTaskTaskSucceeded();
 							}
@@ -439,7 +425,6 @@ namespace SIGVerse.Competition.Handyman
 								SIGVerseLogger.Info("Failed '" + MsgTaskFinished + "'");
 								this.SendPanelNotice("Failed\n" + MsgTaskFinished.Replace('_', ' '), 100, PanelNoticeStatus.Red);
 								this.scoreManager.AddScore(Score.Type.PlacementFailure);
-								StartCoroutine(this.tool.SpeakFailed()); // Speech (Using External executable file)
 
 								this.GoToNextTaskTaskFailed(MsgTaskFinished);
 							}
