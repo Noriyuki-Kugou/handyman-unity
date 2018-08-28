@@ -96,15 +96,15 @@ namespace SIGVerse.Competition.Handyman
 		private HandymanPlaybackRecorder playbackRecorder;
 
 
-		public HandymanModeratorTool(HandymanModerator moderator)
+		public HandymanModeratorTool(List<GameObject> environments, HandymanScoreManager scoreManager, GameObject avatarMotionPlayback, GameObject worldPlayback)
 		{
 			HandymanConfig.Instance.InclementNumberOfTrials();
 
-			EnvironmentInfo environmentInfo = this.EnableEnvironment(moderator.environments);
+			EnvironmentInfo environmentInfo = this.EnableEnvironment(environments);
 
-			this.GetGameObjects(moderator.avatarMotionPlayback, moderator.playbackManager);
+			this.GetGameObjects(avatarMotionPlayback, worldPlayback);
 
-			this.Initialize(environmentInfo, moderator.scoreManager, moderator.objectCollisionAudioSource);
+			this.Initialize(environmentInfo, scoreManager);
 		}
 
 		private EnvironmentInfo EnableEnvironment(List<GameObject> environments)
@@ -163,7 +163,7 @@ namespace SIGVerse.Competition.Handyman
 			this.hsrGraspingDetector = this.robot.GetComponentInChildren<HSRGraspingDetector>();
 
 
-			GameObject moderatorObj = GameObject.FindGameObjectWithTag(TagModerator);
+			GameObject moderator = GameObject.FindGameObjectWithTag(TagModerator);
 
 
 			// Get grasping candidates
@@ -211,7 +211,7 @@ namespace SIGVerse.Competition.Handyman
 
 			this.destinationCandidates = GameObject.FindGameObjectsWithTag(TagDestinationCandidates).ToList<GameObject>();
 
-			this.destinationCandidates.Add(moderatorObj); // Treat moderator as a destination candidate
+			this.destinationCandidates.Add(moderator); // Treat moderator as a destination candidate
 
 			if(this.destinationCandidates.Count == 0)
 			{
@@ -233,7 +233,7 @@ namespace SIGVerse.Competition.Handyman
 		}
 
 
-		private void Initialize(EnvironmentInfo environmentInfo, HandymanScoreManager scoreManager, AudioSource objectCollisionAudioSource)
+		private void Initialize(EnvironmentInfo environmentInfo, HandymanScoreManager scoreManager)
 		{
 			List<GameObject> objectCollisionDestinations = new List<GameObject>();
 			objectCollisionDestinations.Add(scoreManager.gameObject);
@@ -243,7 +243,7 @@ namespace SIGVerse.Competition.Handyman
 			{
 				CollisionTransferer collisionTransferer = graspable.AddComponent<CollisionTransferer>();
 
-				collisionTransferer.Initialize(objectCollisionDestinations, Score.GetObjectCollisionVeloticyThreshold(), 0.1f, objectCollisionAudioSource);
+				collisionTransferer.Initialize(objectCollisionDestinations, Score.GetObjectCollisionVeloticyThreshold());
 			}
 
 

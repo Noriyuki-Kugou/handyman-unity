@@ -57,8 +57,6 @@ namespace SIGVerse.Competition.Handyman
 		public GameObject avatarMotionPlayback;
 		public GameObject playbackManager;
 
-		public AudioSource objectCollisionAudioSource;
-
 		//-----------------------------
 
 		private HandymanModeratorTool tool;
@@ -84,7 +82,7 @@ namespace SIGVerse.Competition.Handyman
 		{
 			try
 			{
-				this.tool = new HandymanModeratorTool(this);
+				this.tool = new HandymanModeratorTool(this.environments, this.scoreManager, this.avatarMotionPlayback, this.playbackManager);
 
 				this.stepTimer = new StepTimer();
 
