@@ -287,15 +287,14 @@ namespace SIGVerse.Competition.Handyman
 							if (isSucceeded)
 							{
 								SIGVerseLogger.Info("Succeeded '" + MsgRoomReached + "'");
-								this.SendPanelNotice("Good Job", 150, PanelNoticeStatus.Green);
+								this.SendPanelNotice("Good", 150, PanelNoticeStatus.Green);
 								this.scoreManager.AddScore(Score.Type.RoomReachingSuccess);
 								this.tool.AddSpeechQueModeratorGood();
 							}
 							else
 							{
-								string detail = "Here is wrong room";
 								SIGVerseLogger.Info("Failed '" + MsgRoomReached + "'");
-								this.SendPanelNotice("Failed\n"+detail, 100, PanelNoticeStatus.Red);
+								this.SendPanelNotice("Failed\n" + MsgRoomReached.Replace('_', ' '), 100, PanelNoticeStatus.Red);
 								this.scoreManager.AddScore(Score.Type.RoomReachingFailure);
 								this.tool.AddSpeechQueModeratorFailed();
 
@@ -327,9 +326,9 @@ namespace SIGVerse.Competition.Handyman
 
 						if (this.receivedMessageMap[MsgDoesNotExist])
 						{
-							string detail = "You found the conflict";
+							string detail = "Send a new message";
 							SIGVerseLogger.Info("Succeeded '" + MsgDoesNotExist + "'");
-							this.SendPanelNotice("Good Job\n"+detail, 90, PanelNoticeStatus.Green);
+							this.SendPanelNotice("Good\n"+detail, 95, PanelNoticeStatus.Green);
 							this.scoreManager.AddScore(Score.Type.TargetConfirmationSuccess);
 							this.tool.AddSpeechQueModeratorGood();
 
@@ -346,7 +345,7 @@ namespace SIGVerse.Competition.Handyman
 
 						if (this.receivedMessageMap[MsgObjectGrasped])
 						{
-							string detail = "The target is wrong";
+							string detail = "Target doesn't exist";
 							SIGVerseLogger.Info("Failed '" + MsgDoesNotExist + "'");
 							this.SendPanelNotice("Failed\n"+detail, 90, PanelNoticeStatus.Red);
 							this.scoreManager.AddScore(Score.Type.TargetConfirmationFailure);
@@ -364,7 +363,7 @@ namespace SIGVerse.Competition.Handyman
 						{
 							if (this.receivedMessageMap[MsgDoesNotExist])
 							{
-								string detail = "You lost the target";
+								string detail = "The target exist";
 								SIGVerseLogger.Info("Failed '" + MsgObjectGrasped + "'");
 								this.SendPanelNotice("Failed\n"+detail, 100, PanelNoticeStatus.Red);
 								this.scoreManager.AddScore(Score.Type.GraspingFailure);
@@ -390,15 +389,14 @@ namespace SIGVerse.Competition.Handyman
 							if (isSucceeded)
 							{
 								SIGVerseLogger.Info("Succeeded '" + MsgObjectGrasped + "'");
-								this.SendPanelNotice("Good Job", 150, PanelNoticeStatus.Green);
+								this.SendPanelNotice("Good", 150, PanelNoticeStatus.Green);
 								this.scoreManager.AddScore(Score.Type.GraspingSuccess);
 								this.tool.AddSpeechQueModeratorGood();
 							}
 							else
 							{
-								string detail = "Failed to grasp";
 								SIGVerseLogger.Info("Failed '" + MsgObjectGrasped + "'");
-								this.SendPanelNotice("Failed\n"+detail, 100, PanelNoticeStatus.Red);
+								this.SendPanelNotice("Failed\n" + MsgObjectGrasped.Replace('_', ' '), 100, PanelNoticeStatus.Red);
 								this.scoreManager.AddScore(Score.Type.GraspingFailure);
 								this.tool.AddSpeechQueModeratorFailed();
 
@@ -440,7 +438,7 @@ namespace SIGVerse.Competition.Handyman
 							if (isSucceeded)
 							{
 								SIGVerseLogger.Info("Succeeded '" + MsgTaskFinished + "'");
-								this.SendPanelNotice("Task Completed", 120, PanelNoticeStatus.Green);
+								this.SendPanelNotice("Succeeded!", 150, PanelNoticeStatus.Green);
 								this.scoreManager.AddScore(Score.Type.PlacementSuccess);
 								this.tool.AddSpeechQueModerator("Excellent!");
 
@@ -448,9 +446,8 @@ namespace SIGVerse.Competition.Handyman
 							}
 							else
 							{
-								string detail = "You didn't complete";
 								SIGVerseLogger.Info("Failed '" + MsgTaskFinished + "'");
-								this.SendPanelNotice("Failed\n"+detail, 100, PanelNoticeStatus.Red);
+								this.SendPanelNotice("Failed\n" + MsgTaskFinished.Replace('_', ' '), 100, PanelNoticeStatus.Red);
 								this.scoreManager.AddScore(Score.Type.PlacementFailure);
 								this.tool.AddSpeechQueModeratorFailed();
 
